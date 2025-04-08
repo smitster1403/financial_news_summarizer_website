@@ -17,8 +17,16 @@ export interface NewsItem {
 
 export function getNewsData(): NewsItem[] {
   try {
-    // Path is relative to the project root
-    const csvPath = path.join(process.cwd(), '../../financial_news_summarizer/data/combined_sentiment.csv');
+    // Path relative to the project root
+    const csvPath = path.join(process.cwd(), '../financial_news_summary_website/data/combined_sentiment.csv');
+    console.log('Attempting to read CSV from:', csvPath);
+    
+    // Check if file exists
+    if (!fs.existsSync(csvPath)) {
+      console.error('CSV file does not exist at path:', csvPath);
+      return [];
+    }
+    
     const fileContent = fs.readFileSync(csvPath, 'utf8');
     
     const records = parse(fileContent, {
@@ -26,6 +34,8 @@ export function getNewsData(): NewsItem[] {
       skip_empty_lines: true,
       trim: true,
     });
+    
+    console.log(`Successfully loaded ${records.length} records from CSV`);
     
     // Convert records to our interface type and add an id
     return records.map((record: any, index: number) => ({

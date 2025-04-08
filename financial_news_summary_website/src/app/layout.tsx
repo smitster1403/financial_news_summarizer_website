@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import DisclaimerWrapper from '@/components/DisclaimerWrapper'; 
+import ScrollToTop from '@/components/ScrollToTop';
 import './globals.css';
 import { Geist } from 'next/font/google';
 import { Geist_Mono } from 'next/font/google';
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className="min-h-screen">
         {children}
         <DisclaimerWrapper />
+        <ScrollToTop />
       </body>
     </html>
   );

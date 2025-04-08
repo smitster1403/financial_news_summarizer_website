@@ -17,8 +17,8 @@ export interface NewsItem {
 
 export function getNewsData(): NewsItem[] {
   try {
-    // Path relative to the project root
-    const csvPath = path.join(process.cwd(), '../financial_news_summary_website/data/combined_sentiment.csv');
+    // Path relative to the project root - CORRECTED PATH
+    const csvPath = path.join(process.cwd(), 'data/combined_sentiment.csv');
     console.log('Attempting to read CSV from:', csvPath);
     
     // Check if file exists

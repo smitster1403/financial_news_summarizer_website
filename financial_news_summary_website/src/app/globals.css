@@ -1,0 +1,146 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS for better visibility and contrast */
+
+:root {
+  --background: #f8f9fa;
+  --foreground: #333333;
+  --card-bg: #ffffff;
+  --positive: #10b981;
+  --negative: #ef4444;
+  --neutral: #6b7280;
+  /* Gradient colors for light mode - INCREASED opacity for more visibility */
+  --positive-gradient: linear-gradient(135deg, rgba(0, 255, 0, 0.2) 0%, rgba(16, 185, 129, 0.05) 100%);
+  --negative-gradient: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.05) 100%);
+  --neutral-gradient: linear-gradient(135deg, rgba(107, 114, 128, 0.2) 0%, rgba(107, 114, 128, 0.05) 100%);
+  /* Hover gradients for light mode - INCREASED opacity for more visibility */
+  --positive-gradient-hover: linear-gradient(135deg, rgba(7, 219, 7, 0.35) 0%, rgba(16, 185, 129, 0.1) 100%);
+  --negative-gradient-hover: linear-gradient(135deg, rgba(239, 68, 68, 0.35) 0%, rgba(239, 68, 68, 0.1) 100%);
+  --neutral-gradient-hover: linear-gradient(135deg, rgba(107, 114, 128, 0.35) 0%, rgba(107, 114, 128, 0.1) 100%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1f2937;
+    --foreground: #f3f4f6;
+    --card-bg: #374151;
+    --positive: #34d399;
+    --negative: #f87171;
+    --neutral: #9ca3af;
+    /* Gradient colors for dark mode - INCREASED opacity for more visibility */
+    --positive-gradient: linear-gradient(135deg, rgba(52, 211, 153, 0.25) 0%, rgba(52, 211, 153, 0.08) 100%);
+    --negative-gradient: linear-gradient(135deg, rgba(248, 113, 113, 0.25) 0%, rgba(248, 113, 113, 0.08) 100%);
+    --neutral-gradient: linear-gradient(135deg, rgba(156, 163, 175, 0.25) 0%, rgba(156, 163, 175, 0.08) 100%);
+    /* Hover gradients for dark mode - INCREASED opacity for more visibility */
+    --positive-gradient-hover: linear-gradient(135deg, rgba(52, 211, 153, 0.4) 0%, rgba(52, 211, 153, 0.15) 100%);
+    --negative-gradient-hover: linear-gradient(135deg, rgba(248, 113, 113, 0.4) 0%, rgba(248, 113, 113, 0.15) 100%);
+    --neutral-gradient-hover: linear-gradient(135deg, rgba(156, 163, 175, 0.4) 0%, rgba(156, 163, 175, 0.15) 100%);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Card styles for better visibility */
+.news-card {
+  background-color: var(--card-bg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.news-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Sentiment-specific card styles */
+.sentiment-positive-card {
+  background-color: var(--card-bg);
+  position: relative;
+}
+
+.sentiment-positive-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--positive-gradient);
+  transition: all 0.4s ease;
+  z-index: 0;
+}
+
+.sentiment-positive-card:hover::before {
+  background: var(--positive-gradient-hover);
+}
+
+.sentiment-negative-card {
+  background-color: var(--card-bg);
+  position: relative;
+}
+
+.sentiment-negative-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--negative-gradient);
+  transition: all 0.4s ease;
+  z-index: 0;
+}
+
+.sentiment-negative-card:hover::before {
+  background: var(--negative-gradient-hover);
+}
+
+.sentiment-neutral-card {
+  background-color: var(--card-bg);
+  position: relative;
+}
+
+.sentiment-neutral-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--neutral-gradient);
+  transition: all 0.4s ease;
+  z-index: 0;
+}
+
+.sentiment-neutral-card:hover::before {
+  background: var(--neutral-gradient-hover);
+}
+
+.sentiment-positive {
+  color: var(--positive);
+}
+
+.sentiment-negative {
+  color: var(--negative);
+}
+
+.sentiment-neutral {
+  color: var(--neutral);
+}

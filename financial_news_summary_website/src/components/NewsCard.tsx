@@ -20,7 +20,7 @@ export default function NewsCard({ news, onCardClick }: NewsCardProps) {
   };
 
   const formatSentimentScore = (score: number) => {
-    return (score).toFixed(1) + '%';
+    return (score * 100).toFixed(1) + '%';
   };
 
   return (

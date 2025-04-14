@@ -1,0 +1,39 @@
+name: Daily News Scraping
+
+on:
+  schedule:
+    # Run at 7:00 AM UTC daily (adjust to your timezone)
+    - cron: '0 7 * * *'
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  scrape-and-summarize:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas beautifulsoup4 requests sumy transformers torch numpy
+      
+      - name: Run scraping and summarization
+        run: |
+          python scrape_and_summarize.py
+      
+      - name: Commit and push if changes
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          git add data/combined_sentiment.csv financial_news_summary_website/public/data/combined_sentiment.csv
+          git commit -m "Update news data - $(date)" || echo "No changes to commit"
+          git push

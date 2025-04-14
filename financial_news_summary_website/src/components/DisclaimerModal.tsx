@@ -34,12 +34,12 @@ export default function DisclaimerModal({ onAccept, authorName = "the developer"
           <div className="my-4 sm:my-6 text-gray-700 dark:text-gray-300 space-y-3 text-sm sm:text-base">
             <p className="font-semibold">IMPORTANT: Not Financial Advice</p>
             <p>
-              The content presented on this website is for informational purposes only and should not be considered financial advice. 
-              I, {authorName}, am not a financial advisor, and the summarized news articles and sentiment analysis are generated using 
-              automated tools and algorithms.
+              The content presented on this website is for academic presentation purposes only and should not be considered financial advice nor a source of actionable financial information. 
+              I, {authorName}, am not a financial professional, and the summarized news articles and sentiment analysis are generated using 
+              automated tools, algorithms, and processes.
             </p>
             <p>
-              The sentiment scores provided are based on computational analysis and do not reflect 
+              The sentiment scores provided are based on output from the FinBERT model found on hugging face and do not reflect 
               a professional assessment of financial markets or investment opportunities. 
             </p>
             <p className="font-semibold">

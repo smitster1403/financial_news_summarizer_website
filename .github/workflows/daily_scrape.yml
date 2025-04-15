@@ -2,8 +2,8 @@ name: Daily News Scraping
 
 on:
   schedule:
-    # Run at 7:00 AM UTC daily (adjust to your timezone)
-    - cron: '0 7 * * *'
+    # Run at 6:06 AM UTC daily (adjust to your timezone)
+    - cron: '6 6 * * *'
   
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

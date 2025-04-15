@@ -19,8 +19,15 @@ export default function NewsCard({ news, onCardClick }: NewsCardProps) {
     return 'text-gray-700 dark:text-gray-300';
   };
 
-  const formatSentimentScore = (score: number) => {
-    return (score * 100).toFixed(1) + '%';
+  const formatSentimentScore = (score: number | string) => {
+    // If score is already a string ending with %, return it as is
+    if (typeof score === 'string' && score.endsWith('%')) {
+      return score;
+    }
+    
+    // Convert to number and format
+    const numericScore = typeof score === 'number' ? score : parseFloat(score as string);
+    return (numericScore * 100).toFixed(1) + '%';
   };
 
   return (

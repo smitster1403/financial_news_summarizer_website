@@ -503,7 +503,7 @@ try:
             print(f"Row {i}: {data['label']} | score: {(data['score'])*100:.2f}%")
             
             combined_df.loc[i, 'sentiment'] = data['label']
-            combined_df.loc[i, 'sentiment_score'] = data['score']
+            combined_df.loc[i, 'sentiment_score'] = data['score']  # Store as a number
         except Exception as e:
             print(f"Error processing row {i}: {e}")
             combined_df.loc[i, 'sentiment'] = 'neutral'

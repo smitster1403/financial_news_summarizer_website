@@ -1,5 +1,5 @@
 import pandas as pd
-import gensim, sumy
+import sumy
 import numpy as np
 import requests, time, random
 from bs4 import BeautifulSoup

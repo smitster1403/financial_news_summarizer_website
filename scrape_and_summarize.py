@@ -1,6 +1,6 @@
 import pandas as pd
 import sumy
-import numpy as np
+# import numpy as np
 import requests, time, random
 from bs4 import BeautifulSoup
 from pprint import pprint

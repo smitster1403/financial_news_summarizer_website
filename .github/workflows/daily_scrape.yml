@@ -2,10 +2,8 @@ name: Daily News Scraping
 
 on:
   schedule:
-    # Run at 6:06 AM UTC daily (adjust to your timezone)
+    # Run at 6:06 AM UTC daily
     - cron: '6 6 * * *'
-  
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   push:
     branches: [ main ]
@@ -13,7 +11,7 @@ on:
     branches: [ main ]
 
 jobs:
-  scrape-and-summarize:
+  scrape-and-build:
     runs-on: ubuntu-latest
     
     steps:
@@ -23,12 +21,15 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: '3.9'
       
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install gensim sumy pandas numpy beautifulsoup4 requests
+          pip install rouge-score seaborn matplotlib
+          pip install transformers torch
+          pip install scikit-learn
 
       - name: Run the script
         run: python scrape_and_summarize.py
@@ -40,22 +41,3 @@ jobs:
           git add data/combined_sentiment.csv financial_news_summary_website/public/data/combined_sentiment.csv
           git commit -m "Update news data - $(date)" || echo "No changes to commit"
           git push
-
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-    - name: Run script
-      run: python scrape_and_summarize.py

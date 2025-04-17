@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install gensim pandas beautifulsoup4 requests sumy transformers torch numpy
+          pip install pandas beautifulsoup4 requests sumy transformers torch numpy gensim
       
       - name: Run scraping and summarization
         run: |

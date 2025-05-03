@@ -30,6 +30,7 @@ jobs:
           pip install rouge-score seaborn matplotlib
           pip install transformers torch
           pip install scikit-learn
+          python -c "import nltk; nltk.download('punkt')"
 
       - name: Run the script
         run: python scrape_and_summarize.py

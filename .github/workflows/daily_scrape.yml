@@ -13,6 +13,8 @@ on:
 jobs:
   scrape-and-build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout code
@@ -32,13 +34,30 @@ jobs:
           pip install scikit-learn
           python -c "import nltk; nltk.download('punkt')"
 
+      - name: Create necessary directories
+        run: |
+          mkdir -p data
+          mkdir -p financial_news_summary_website/data
+
       - name: Run the script
         run: python scrape_and_summarize.py
+        
+      - name: Check generated files
+        run: |
+          echo "Files in data directory:"
+          ls -la data/ || echo "No data directory found"
+          echo "Files in website data directory:"
+          ls -la financial_news_summary_website/data/ || echo "No website data directory found"
           
       - name: Commit and push if changes
         run: |
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'actions@github.com'
-          git add data/combined_sentiment.csv financial_news_summary_website/public/data/combined_sentiment.csv
-          git commit -m "Update news data - $(date)" || echo "No changes to commit"
-          git push
+          git add -A data/ financial_news_summary_website/data/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update news data - $(date)"
+            git push
+            echo "Changes committed and pushed"
+          fi
